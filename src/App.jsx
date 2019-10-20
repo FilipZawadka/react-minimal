@@ -3,7 +3,7 @@ import AppTitle from './AppTitle'
 import { ENETUNREACH } from 'constants';
 
 function generateArray(a,b) {return Array.from({length:b-a+1} ,(val,index)=>index+a);}
-
+let rendnum=0;
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -23,10 +23,13 @@ class App extends React.Component {
     this.setState({b: Number(event.target.value)});
   }
 
-
+  
   render() {
+    rendnum++;
     return (
-      <form >
+      
+      <form > 
+       <p> {console.time("render - "+rendnum.toString()+" - ")}</p>
         <p>
           Input a i b:
           <input type="number" onChange={this.ahandleChange}/>
@@ -36,9 +39,11 @@ class App extends React.Component {
         <p>Number a: {this.state.a}</p>
         <p>Number b: {this.state.b}</p>
         <p>{(this.state.a>0)&&(this.state.a<this.state.b)&&(generateArray(this.state.a,this.state.b).join(","))}</p>
-      </form>
+        <p>{console.timeEnd("render - "+rendnum.toString()+" - ")}</p>
+         </form>
     );
   }
+  
 }
 
 export default App
