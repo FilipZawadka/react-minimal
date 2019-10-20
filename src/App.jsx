@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import AppTitle from './AppTitle'
 import { ENETUNREACH } from 'constants';
 
+function generateArray(a,b) {return Array.from({length:b-a+1} ,(val,index)=>index+a);}
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -14,11 +16,11 @@ class App extends React.Component {
   }
 
   ahandleChange(event) {
-    this.setState({a: event.target.value});
+    this.setState({a: Number(event.target.value)});
   }
 
   bhandleChange(event) {
-    this.setState({b: event.target.value});
+    this.setState({b: Number(event.target.value)});
   }
 
 
@@ -33,6 +35,7 @@ class App extends React.Component {
         </p>
         <p>Number a: {this.state.a}</p>
         <p>Number b: {this.state.b}</p>
+        <p>{(this.state.a>0)&&(this.state.a<this.state.b)&&(generateArray(this.state.a,this.state.b).join(","))}</p>
       </form>
     );
   }
